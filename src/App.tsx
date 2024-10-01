@@ -19,7 +19,7 @@ function App() {
     return (
         <div className="App">
             <TodoList title="What to learn" tasks={tasks1} date="20240930" />
-            <TodoList title="Songs" tasks={tasks2} date="20241001" />
+            <TodoList title="Songs" tasks={tasks2} />
             {/*<TodoList title="WSongs" />*/}
             {/*<TodoList title="Books" />*/}
         </div>

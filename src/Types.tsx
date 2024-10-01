@@ -1,8 +1,8 @@
 
 export type TodoListPropsType = {
     title: string
-    date: string
     tasks: TaskType[]
+    date?: string
 }
 
 export type TaskType = {

@@ -19,6 +19,7 @@ export const TodoList = ({title, tasks, date}: TodoListPropsType) => {
                 <button>Active</button>
                 <button>Completed</button>
             </div>
+            <div>{date}</div>
         </div>
     )
 }
