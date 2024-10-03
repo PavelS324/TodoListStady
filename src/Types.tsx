@@ -11,3 +11,7 @@ export type TaskType = {
     isDone: boolean
 }
 
+export type ButtonPropsType = {
+    title: string
+}
+
