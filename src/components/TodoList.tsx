@@ -1,14 +1,14 @@
 import React from "react";
-import {TaskType, TodoListPropsType} from "../Types";
+import {TodoListPropsType} from "../Types";
 import {Button} from "./Button";
 
-export const TodoList = ({title, tasks, date}: TodoListPropsType) => {
+export const TodoList = ({title, tasks, date, onClick}: TodoListPropsType) => {
     return (
         <div>
             <h3>{title}</h3>
             <div>
                 <input/>
-                <Button title="+" />
+                <Button title="+"/>
             </div>
             {/*<TodoList_ul tasks={tasks} />*/}
             {tasks.length === 0 ? (
@@ -20,7 +20,12 @@ export const TodoList = ({title, tasks, date}: TodoListPropsType) => {
                     {/*<li><input type="checkbox" checked={tasks[2].isDone}/> <span>{tasks[2].title}</span></li>*/}
                     {tasks.map(task => {
                         return (
-                            <li key={task.id}><input type="checkbox" checked={task.isDone}/> <span>{task.title}</span>
+                            <li key={task.id}>
+                                <input type="checkbox" checked={task.isDone}/>
+                                <span>{task.title}</span>
+                                <Button title="x" onClick={() => onClick(task.id)} />
+                                <span>{task.id}</span>
+                                <button onClick={() => onClick(task.id)}>x</button>
                             </li>
                         )
                     })}
@@ -28,9 +33,9 @@ export const TodoList = ({title, tasks, date}: TodoListPropsType) => {
             )
             }
             <div>
-                <Button title="All" />
-                <Button title="Active" />
-                <Button title="Completed" />
+                <Button title="All"/>
+                <Button title="Active"/>
+                <Button title="Completed"/>
             </div>
             <div>{date}</div>
         </div>

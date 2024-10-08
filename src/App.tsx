@@ -1,29 +1,44 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {TodoList} from "./components/TodoList";
 import {TaskType} from "./Types";
 
 function App() {
-    const tasks1: Array<TaskType> = [
+    const [tasks1, setTasks1] = useState<TaskType[]>([
         { id: 1, title: 'HTML&CSS', isDone: true },
         { id: 2, title: 'JS', isDone: true },
         { id: 3, title: 'ReactJS', isDone: false },
         { id: 4, title: 'Redux', isDone: false },
         { id: 5, title: 'Typescript', isDone: false },
         { id: 6, title: 'RTK query', isDone: false },
-    ]
+    ])
 
-    const tasks2: TaskType[] = [
-        // { id: 1, title: 'Hello world', isDone: true },
-        // { id: 2, title: 'I am Happy', isDone: false },
-        // { id: 3, title: 'Yo', isDone: false },
-        // { id: 4, title: 'Redux', isDone: false },
-    ]
+    // const tasks2: TaskType[] = [
+    //     // { id: 1, title: 'Hello world', isDone: true },
+    //     // { id: 2, title: 'I am Happy', isDone: false },
+    //     // { id: 3, title: 'Yo', isDone: false },
+    //     // { id: 4, title: 'Redux', isDone: false },
+    // ]
+
+    const [count, setcount] = useState(0);
+
+    const onClickDel = (id: number) => {
+        setcount(id);
+        alert(count);
+    }
+
+    const delTask = (id: number) => {
+        // alert(id)
+        const filteredTasks = tasks1.filter(task => {
+            return task.id !== id
+        })
+        setTasks1(filteredTasks)
+    }
 
     return (
         <div className="App">
-            <TodoList title="What to learn" tasks={tasks1} date="20240930" />
-            <TodoList title="Songs" tasks={tasks2} />
+            <TodoList title="What to learn" tasks={tasks1} date="20240930" onClick={delTask} />
+            {/*<TodoList title="Songs" tasks={tasks2} />*/}
             {/*<TodoList title="WSongs" />*/}
             {/*<TodoList title="Books" />*/}
         </div>
