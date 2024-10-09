@@ -2,7 +2,7 @@ import React from "react";
 import {TodoListPropsType} from "../Types";
 import {Button} from "./Button";
 
-export const TodoList = ({title, tasks, date, onClick}: TodoListPropsType) => {
+export const TodoList = ({title, tasks, date, onClick, filterTasks}: TodoListPropsType) => {
     return (
         <div>
             <h3>{title}</h3>
@@ -24,8 +24,8 @@ export const TodoList = ({title, tasks, date, onClick}: TodoListPropsType) => {
                                 <input type="checkbox" checked={task.isDone}/>
                                 <span>{task.title}</span>
                                 <Button title="x" onClick={() => onClick(task.id)} />
-                                <span>{task.id}</span>
-                                <button onClick={() => onClick(task.id)}>x</button>
+                                {/*<span>{task.id}</span>*/}
+                                {/*<button onClick={() => onClick(task.id)}>x</button>*/}
                             </li>
                         )
                     })}
@@ -33,9 +33,9 @@ export const TodoList = ({title, tasks, date, onClick}: TodoListPropsType) => {
             )
             }
             <div>
-                <Button title="All"/>
-                <Button title="Active"/>
-                <Button title="Completed"/>
+                <Button title="All" onClick={() => filterTasks('all')} />
+                <Button title="Active" onClick={() => filterTasks('active')} />
+                <Button title="Completed" onClick={() => filterTasks('completed')} />
             </div>
             <div>{date}</div>
         </div>

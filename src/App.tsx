@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
 import {TodoList} from "./components/TodoList";
-import {TaskType} from "./Types";
+import {FiltersType, TaskType} from "./Types";
 
 function App() {
     const [tasks1, setTasks1] = useState<TaskType[]>([
@@ -20,12 +20,12 @@ function App() {
     //     // { id: 4, title: 'Redux', isDone: false },
     // ]
 
-    const [count, setcount] = useState(0);
-
-    const onClickDel = (id: number) => {
-        setcount(id);
-        alert(count);
-    }
+    // const [count, setcount] = useState(0);
+    //
+    // const onClickDel = (id: number) => {
+    //     setcount(id);
+    //     alert(count);
+    // }
 
     const delTask = (id: number) => {
         // alert(id)
@@ -35,9 +35,23 @@ function App() {
         setTasks1(filteredTasks)
     }
 
+    const [filter, setFilter] = useState<FiltersType>('all')
+    let tasksForTodoList = tasks1
+    if (filter === 'active') {
+        tasksForTodoList = tasks1.filter(task => !task.isDone)
+    }
+    if (filter === 'completed') {
+        tasksForTodoList = tasks1.filter(task => task.isDone)
+    }
+
+    const filterTasks = (filter: FiltersType) => {
+        setFilter(filter)
+    }
+
+
     return (
         <div className="App">
-            <TodoList title="What to learn" tasks={tasks1} date="20240930" onClick={delTask} />
+            <TodoList title="What to learn" tasks={tasksForTodoList} date="20240930" onClick={delTask} filterTasks={filterTasks} />
             {/*<TodoList title="Songs" tasks={tasks2} />*/}
             {/*<TodoList title="WSongs" />*/}
             {/*<TodoList title="Books" />*/}
