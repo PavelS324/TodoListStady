@@ -3,12 +3,13 @@ export type TodoListPropsType = {
     title: string
     tasks: TaskType[]
     date?: string
-    onClick: (id: number) => void
+    onClick: (id: string) => void
     filterTasks: (filter: FiltersType) => void
+    addTask: (title: string) => void
 }
 
 export type TaskType = {
-    id: number
+    id: string
     title: string
     isDone: boolean
 }
