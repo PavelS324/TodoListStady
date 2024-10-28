@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, {ChangeEvent, KeyboardEvent, useRef, useState} from "react";
 import {TodoListPropsType} from "../Types";
 import {Button} from "./Button";
 import {Simulate} from "react-dom/test-utils";
@@ -9,24 +9,26 @@ export const TodoList = ({title, tasks, date, onClick, filterTasks, addTask}: To
     // const inputRef = useRef<HTMLInputElement>(null)
 
     const [taskTitle, setTaskTitle] = useState<string>('')
-    const changeInputOfTask = (titleLoc: string) => {
-        // console.log('Change input text: ' + titleLoc + '___')
-        setTaskTitle(titleLoc)
+    const changeTaskTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        setTaskTitle(event.currentTarget.value)
     }
 
     const addTaskHandler = () => {
         addTask(taskTitle)
         setTaskTitle('')
     }
+    
+    const addTaskOnKeyUpHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            addTaskHandler()
+        }
+    }
 
     return (
         <div>
             <h3>{title}</h3>
             <div>
-                <input value={taskTitle} onChange={event => changeInputOfTask(event.currentTarget.value)} onKeyUp={event => {
-                    if (event.key === 'Enter') {
-                        addTaskHandler()
-                    }}} />
+                <input value={taskTitle} onChange={changeTaskTitleHandler} onKeyUp={addTaskOnKeyUpHandler} />
                 <Button title="+" onClick={addTaskHandler} />
                 {/*<input onChange={() => changeInputOfTask} ref={inputRef}/>*/}
                 {/*<Button title="+" onClick={() => {if (inputRef.current) {addTask(inputRef.current.value); inputRef.current.value = '' }}} />*/}
@@ -37,11 +39,15 @@ export const TodoList = ({title, tasks, date, onClick, filterTasks, addTask}: To
             ) : (
                 <ul>
                     {tasks.map(task => {
+                        const removeTaskHandler = () => {
+                            onClick(task.id)
+                        }
+
                         return (
                             <li key={task.id}>
                                 <input type="checkbox" checked={task.isDone} onChange={()=>{}} />
                                 <span>{task.title}</span>
-                                <Button title="x" onClick={() => onClick(task.id)} />
+                                <Button title="x" onClick={removeTaskHandler} />
                             </li>
                         )
                     })}
@@ -58,22 +64,3 @@ export const TodoList = ({title, tasks, date, onClick, filterTasks, addTask}: To
     )
 }
 
-// const TodoList_ul = ({tasks}: TaskType[]) => {
-//     if (tasks.length === 0) {
-//         return <p>Тасок нет</p>
-//     }
-//     return (
-//         <>
-//             <ul>
-//                 {/*<li><input type="checkbox" checked={tasks[0].isDone}/> <span>{tasks[0].title}</span></li>*/}
-//                 {/*<li><input type="checkbox" checked={tasks[1].isDone}/> <span>{tasks[1].title}</span></li>*/}
-//                 {/*<li><input type="checkbox" checked={tasks[2].isDone}/> <span>{tasks[2].title}</span></li>*/}
-//                 {tasks.map(task => {
-//                     return (
-//                         <li key={task.id}><input type="checkbox" checked={task.isDone}/> <span>{task.title}</span></li>
-//                     )
-//                 })}
-//             </ul>
-//         </>
-//     )
-// }
