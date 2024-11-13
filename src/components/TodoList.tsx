@@ -14,8 +14,10 @@ export const TodoList = ({title, tasks, date, onClick, filterTasks, addTask, cha
     }
 
     const addTaskHandler = () => {
-        addTask(taskTitle)
-        setTaskTitle('')
+        if (taskTitle.trim() !== '') {
+            addTask(taskTitle)
+            setTaskTitle('')
+        }
     }
     
     const addTaskOnKeyUpHandler = (event: KeyboardEvent<HTMLInputElement>) => {
