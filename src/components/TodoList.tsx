@@ -4,7 +4,7 @@ import {Button} from "./Button";
 import {Simulate} from "react-dom/test-utils";
 import input = Simulate.input;
 
-export const TodoList = ({title, tasks, date, onClick, filterTasks, addTask}: TodoListPropsType) => {
+export const TodoList = ({title, tasks, date, onClick, filterTasks, addTask, changeStatusTask}: TodoListPropsType) => {
 
     // const inputRef = useRef<HTMLInputElement>(null)
 
@@ -22,6 +22,10 @@ export const TodoList = ({title, tasks, date, onClick, filterTasks, addTask}: To
         if (event.key === 'Enter') {
             addTaskHandler()
         }
+    }
+
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        changeStatusTask(e.currentTarget.id, e.currentTarget.checked)
     }
 
     return (
@@ -45,7 +49,7 @@ export const TodoList = ({title, tasks, date, onClick, filterTasks, addTask}: To
 
                         return (
                             <li key={task.id}>
-                                <input type="checkbox" checked={task.isDone} onChange={()=>{}} />
+                                <input type="checkbox" checked={task.isDone} onChange={onChangeHandler} id={task.id} />
                                 <span>{task.title}</span>
                                 <Button title="x" onClick={removeTaskHandler} />
                             </li>

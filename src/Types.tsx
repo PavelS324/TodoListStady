@@ -6,6 +6,7 @@ export type TodoListPropsType = {
     onClick: (id: string) => void
     filterTasks: (filter: FiltersType) => void
     addTask: (title: string) => void
+    changeStatusTask: (id: string, checked: boolean) => void
 }
 
 export type TaskType = {

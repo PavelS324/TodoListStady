@@ -54,9 +54,14 @@ function App() {
         setTasks1(a => [{id: v1(), title: title, isDone: false}, ...tasks1])
     }
 
+    const changeStatusTask = (id: string, checked: boolean) => {
+        // const newTask = tasks1.find(t => t.id === id)
+        setTasks1(tasks1.map(t => t.id === id ? {...t, isDone: checked} : t))
+    }
+
     return (
         <div className="App">
-            <TodoList title="What to learn" tasks={tasksForTodoList} date="20240930" onClick={delTask} filterTasks={filterTasks} addTask={addTask} />
+            <TodoList title="What to learn" tasks={tasksForTodoList} date="20240930" onClick={delTask} filterTasks={filterTasks} addTask={addTask} changeStatusTask={changeStatusTask} />
             {/*<TodoList title="Songs" tasks={tasks2} />*/}
             {/*<TodoList title="WSongs" />*/}
             {/*<TodoList title="Books" />*/}
