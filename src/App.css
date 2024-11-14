@@ -19,3 +19,7 @@
   background-color: lightgreen;
 }
 
+.is-done {
+  opacity: 0.5;
+}
+
