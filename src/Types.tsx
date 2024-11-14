@@ -7,6 +7,7 @@ export type TodoListPropsType = {
     filterTasks: (filter: FiltersType) => void
     addTask: (title: string) => void
     changeStatusTask: (id: string, checked: boolean) => void
+    filterForTasks: FiltersType | undefined
 }
 
 export type TaskType = {
@@ -18,6 +19,7 @@ export type TaskType = {
 export type ButtonPropsType = {
     title: string
     onClick?: () => void
+    className?: string
 }
 
 export type FiltersType = "all" | "active" | "completed"

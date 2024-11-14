@@ -61,7 +61,7 @@ function App() {
 
     return (
         <div className="App">
-            <TodoList title="What to learn" tasks={tasksForTodoList} date="20240930" onClick={delTask} filterTasks={filterTasks} addTask={addTask} changeStatusTask={changeStatusTask} />
+            <TodoList title="What to learn" tasks={tasksForTodoList} date="20240930" onClick={delTask} filterTasks={filterTasks} addTask={addTask} changeStatusTask={changeStatusTask} filterForTasks={filter} />
             {/*<TodoList title="Songs" tasks={tasks2} />*/}
             {/*<TodoList title="WSongs" />*/}
             {/*<TodoList title="Books" />*/}

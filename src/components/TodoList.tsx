@@ -1,10 +1,10 @@
 import React, {ChangeEvent, KeyboardEvent, useRef, useState} from "react";
-import {TodoListPropsType} from "../Types";
+import {FiltersType, TodoListPropsType} from "../Types";
 import {Button} from "./Button";
 import {Simulate} from "react-dom/test-utils";
 import input = Simulate.input;
 
-export const TodoList = ({title, tasks, date, onClick, filterTasks, addTask, changeStatusTask}: TodoListPropsType) => {
+export const TodoList = ({title, tasks, date, onClick, filterTasks, addTask, changeStatusTask, filterForTasks}: TodoListPropsType) => {
 
     // const inputRef = useRef<HTMLInputElement>(null)
 
@@ -67,9 +67,9 @@ export const TodoList = ({title, tasks, date, onClick, filterTasks, addTask, cha
             )
             }
             <div>
-                <Button title="All" onClick={() => filterTasks('all')} />
-                <Button title="Active" onClick={() => filterTasks('active')} />
-                <Button title="Completed" onClick={() => filterTasks('completed')} />
+                <Button title="All" onClick={() => filterTasks('all')} className={filterForTasks === 'all' ? 'active-filter' : ''} />
+                <Button title="Active" onClick={() => filterTasks('active')} className={filterForTasks === 'active' ? 'active-filter' : ''} />
+                <Button title="Completed" onClick={() => filterTasks('completed')} className={filterForTasks === 'completed' ? 'active-filter' : ''} />
             </div>
             <div>{date}</div>
         </div>
